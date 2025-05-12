@@ -25,7 +25,7 @@ router.post(
     const prompt = `
 Baseado nestes filmes: ${JSON.stringify(
       movieTitles
-    )}, gere um array JSON com 30 filmes semelhantes.
+    )}, gere um array JSON com 30 filmes semelhantes, não inclua os filmes fornecidos.
 Sem explicações. Apenas o array. ${
       language === 'en' ? 'Respond in English.' : 'Responda em Português.'
     }
