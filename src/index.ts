@@ -1,6 +1,7 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { checkApiKey } from './middlewares/checkAPIKey';
@@ -8,7 +9,6 @@ import { checkOrigin } from './middlewares/checkOrigin';
 import { errorHandler } from './middlewares/errorHandler';
 import openaiRoutes from './routes/openai';
 import tmdbRoutes from './routes/tmdb';
-import { limiter } from './utils/rateLimit';
 
 dotenv.config();
 
@@ -20,8 +20,20 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
 
-app.use('/api', checkOrigin, checkApiKey, limiter, tmdbRoutes);
-app.use('/api', checkOrigin, checkApiKey, limiter, openaiRoutes);
+app.use('/api', checkOrigin, checkApiKey, tmdbRoutes);
+app.use(
+  '/api',
+  checkOrigin,
+  checkApiKey,
+  rateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 10,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: 'Too many requests, please try again later.' },
+  }),
+  openaiRoutes
+);
 
 app.use(errorHandler);
 
