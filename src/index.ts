@@ -26,8 +26,8 @@ app.use(
   checkOrigin,
   checkApiKey,
   rateLimit({
-    windowMs: 1 * 60 * 1000,
-    max: 10,
+    windowMs: 60 * 60 * 1000,
+    max: 3,
     standardHeaders: true,
     legacyHeaders: false,
     message: { error: 'Too many requests, please try again later.' },
