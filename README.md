@@ -1,18 +1,18 @@
-# API 30 Dias de Filmes
-API segura que usa a API do TMDB e da OpenAI para consultar e recomendar os filmes.
+# 30 day movie API
+Secure API that uses the TMDB API and OpenAI to query and recommend movies.
 
-## 🚀 Tecnologias
+## Tech
 - [Node.js](https://nodejs.org)
 - [Express](https://expressjs.com)
 - [TypeScript](https://www.typescriptlang.org)
 - [Axios](https://axios-http.com)
 - [OpenAI](https://openai.com/api)
 
-## 🔧 Scripts
+## Scripts
 ```bash
-# instalar dependências
+# install dependencies
 npm install
 
-# rodar localmente
+# rodar locally
 npm run dev
 ```
